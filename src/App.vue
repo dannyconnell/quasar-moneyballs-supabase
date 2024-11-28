@@ -19,6 +19,7 @@ const storeSettings = useStoreSettings(),
       router = useRouter()
 
 onMounted(() => {
+
   storeSettings.loadSettings()
   storeEntries.loadEntries()
 
