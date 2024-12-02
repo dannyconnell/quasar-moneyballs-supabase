@@ -85,8 +85,24 @@ export const useStoreEntries = defineStore('entries', () => {
         .select('*')
 
       if (error) useShowErrorMessage(error.message)
-      if (data) entries.value = data
+      if (data) { 
+        entries.value = data
+        subscribeEntries()
+      }
     
+    }
+
+    const subscribeEntries = () => {
+
+      supabase.channel('entries-channel')
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'entries' },
+          (payload) => {
+            console.log('Change received!', payload)
+          }
+        )
+        .subscribe()
     }
 
     const addEntry = addEntryForm => {
