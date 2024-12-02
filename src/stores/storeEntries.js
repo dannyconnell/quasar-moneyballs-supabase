@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, reactive, nextTick } from 'vue'
 import { uid, Notify } from 'quasar'
+import { useShowErrorMessage } from 'src/use/useShowErrorMessage'
 import supabase from 'src/config/supabase'
 
 export const useStoreEntries = defineStore('entries', () => {
@@ -83,6 +84,7 @@ export const useStoreEntries = defineStore('entries', () => {
         .from('entries')
         .select('*')
 
+      if (error) useShowErrorMessage(error.message)
       if (data) entries.value = data
     
     }
