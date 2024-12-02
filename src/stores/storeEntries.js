@@ -100,6 +100,9 @@ export const useStoreEntries = defineStore('entries', () => {
           { event: '*', schema: 'public', table: 'entries' },
           (payload) => {
             console.log('Change received!', payload)
+            if (payload.eventType === 'INSERT') {
+              entries.value.push(payload.new)
+            }
           }
         )
         .subscribe()
