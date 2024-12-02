@@ -107,6 +107,10 @@ export const useStoreEntries = defineStore('entries', () => {
               const index = getEntryIndexById(payload.old.id)
               entries.value.splice(index)
             }
+            if (payload.eventType === 'UPDATE') {
+              const index = getEntryIndexById(payload.new.id)
+              Object.assign(entries.value[index], payload.new)
+            }
           }
         )
         .subscribe()
