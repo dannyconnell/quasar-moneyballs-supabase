@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, reactive, nextTick } from 'vue'
 import { uid, Notify } from 'quasar'
+import supabase from 'src/config/supabase'
 
 export const useStoreEntries = defineStore('entries', () => {
 
@@ -76,8 +77,14 @@ export const useStoreEntries = defineStore('entries', () => {
     actions
   */
   
-    const loadEntries = () => {
-      console.log('get entries from Supabase')
+    const loadEntries = async () => {
+
+      let { data, error } = await supabase
+        .from('entries')
+        .select('*')
+
+      if (data) entries.value = data
+    
     }
 
     const addEntry = addEntryForm => {
