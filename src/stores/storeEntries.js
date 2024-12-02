@@ -103,6 +103,10 @@ export const useStoreEntries = defineStore('entries', () => {
             if (payload.eventType === 'INSERT') {
               entries.value.push(payload.new)
             }
+            if (payload.eventType === 'DELETE') {
+              const index = getEntryIndexById(payload.old.id)
+              entries.value.splice(index)
+            }
           }
         )
         .subscribe()
