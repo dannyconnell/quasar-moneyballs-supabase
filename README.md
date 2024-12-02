@@ -22,6 +22,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - Click **New table**
 - In Name, enter **entries**
 - Disable **Enable Row Level Security (RLS)**
+- Enable **Enable Realtime**
 - For the **id** column, change the **Type** to **uuid**
 - Add the following columns (by clicking **Add column**):
 

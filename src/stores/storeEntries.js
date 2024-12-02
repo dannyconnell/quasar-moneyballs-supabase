@@ -37,6 +37,8 @@ export const useStoreEntries = defineStore('entries', () => {
       // },
     ])
 
+    const entriesLoaded = ref(false)
+
     const options = reactive({
       sort: false
     })
@@ -80,6 +82,8 @@ export const useStoreEntries = defineStore('entries', () => {
   
     const loadEntries = async () => {
 
+      entriesLoaded.value = false
+
       let { data, error } = await supabase
         .from('entries')
         .select('*')
@@ -87,6 +91,7 @@ export const useStoreEntries = defineStore('entries', () => {
       if (error) useShowErrorMessage(error.message)
       if (data) { 
         entries.value = data
+        entriesLoaded.value = true
         subscribeEntries()
       }
     
@@ -99,7 +104,6 @@ export const useStoreEntries = defineStore('entries', () => {
           'postgres_changes',
           { event: '*', schema: 'public', table: 'entries' },
           (payload) => {
-            console.log('Change received!', payload)
             if (payload.eventType === 'INSERT') {
               entries.value.push(payload.new)
             }
@@ -173,6 +177,7 @@ export const useStoreEntries = defineStore('entries', () => {
 
       // state
       entries,
+      entriesLoaded,
       options,
 
       // getters
