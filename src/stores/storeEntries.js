@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed, reactive, nextTick } from 'vue'
 import { Notify } from 'quasar'
 import { useShowErrorMessage } from 'src/use/useShowErrorMessage'
+import { useNonReactiveCopy } from 'src/use/useNonReactiveCopy'
 import supabase from 'src/config/supabase'
 
 export const useStoreEntries = defineStore('entries', () => {
@@ -152,7 +153,9 @@ export const useStoreEntries = defineStore('entries', () => {
     }
 
     const updateEntry = async (entryId, updates) => {
-      const index = getEntryIndexById(entryId)
+      const index = getEntryIndexById(entryId),
+            oldEntry = useNonReactiveCopy(entries.value[index])
+
       Object.assign(entries.value[index], updates)
 
       const { error } = await supabase
@@ -161,7 +164,10 @@ export const useStoreEntries = defineStore('entries', () => {
         .eq('id', entryId)
         .select()
 
-      if (error) useShowErrorMessage('Entry could not be updated on Supabase')
+      if (error) {
+        useShowErrorMessage('Entry could not be updated on Supabase')
+        Object.assign(entries.value[index], oldEntry)
+      }
     
     }
 
