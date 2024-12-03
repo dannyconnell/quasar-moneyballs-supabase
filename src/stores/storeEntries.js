@@ -135,14 +135,20 @@ export const useStoreEntries = defineStore('entries', () => {
     
     }
 
-    const deleteEntry = entryId => {
-      const index = getEntryIndexById(entryId)
-      entries.value.splice(index, 1)
-      removeSlideItemIfExists(entryId)
-      Notify.create({
-        message: 'Entry deleted',
-        position: 'top'
-      })
+    const deleteEntry = async entryId => {
+      const { error } = await supabase
+        .from('entries')
+        .delete()
+        .eq('id', entryId)
+
+      if (error) useShowErrorMessage(error.message)
+      else {
+        removeSlideItemIfExists(entryId)
+        Notify.create({
+          message: 'Entry deleted',
+          position: 'top'
+        })
+      }
     }
 
     const updateEntry = (entryId, updates) => {
