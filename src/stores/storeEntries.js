@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed, reactive, nextTick } from 'vue'
-import { uid, Notify } from 'quasar'
+import { Notify } from 'quasar'
 import { useShowErrorMessage } from 'src/use/useShowErrorMessage'
 import supabase from 'src/config/supabase'
 
@@ -120,10 +120,19 @@ export const useStoreEntries = defineStore('entries', () => {
         .subscribe()
     }
 
-    const addEntry = addEntryForm => {
-      const newEntry = Object.assign({}, addEntryForm, { id: uid(), paid: false })
+    const addEntry = async addEntryForm => {
+      const newEntry = Object.assign({}, addEntryForm, { paid: false })
       if (newEntry.amount ===  null) newEntry.amount = 0
-      entries.value.push(newEntry)
+
+      const { error } = await supabase
+        .from('entries')
+        .insert([
+          newEntry,
+        ])
+        .select()
+
+      if (error) useShowErrorMessage('Could not add entry to Supabase')
+    
     }
 
     const deleteEntry = entryId => {
