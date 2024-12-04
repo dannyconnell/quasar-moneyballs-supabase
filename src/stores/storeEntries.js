@@ -16,25 +16,29 @@ export const useStoreEntries = defineStore('entries', () => {
       //   id: 'id1',
       //   name: 'Salary',
       //   amount: 4999.99,
-      //   paid: true
+      //   paid: true,
+      //   order: 1
       // },
       // {
       //   id: 'id2',
       //   name: 'Rent',
       //   amount: -999,
-      //   paid: false
+      //   paid: false,
+      //   order: 2
       // },
       // {
       //   id: 'id3',
       //   name: 'Phone bill',
       //   amount: -14.99,
-      //   paid: false
+      //   paid: false,
+      //   order: 3
       // },
       // {
       //   id: 'id4',
       //   name: 'Unknown',
       //   amount: 0,
-      //   paid: false
+      //   paid: false,
+      //   order: 4
       // },
     ])
 
@@ -88,6 +92,7 @@ export const useStoreEntries = defineStore('entries', () => {
       let { data, error } = await supabase
         .from('entries')
         .select('*')
+        .order('order', { ascending: true })
 
       if (error) useShowErrorMessage(error.message)
       if (data) { 
@@ -122,7 +127,10 @@ export const useStoreEntries = defineStore('entries', () => {
     }
 
     const addEntry = async addEntryForm => {
-      const newEntry = Object.assign({}, addEntryForm, { paid: false })
+      const newEntry = Object.assign({}, addEntryForm, { 
+        paid: false,
+        order: generateOrderNumber()
+      })
       if (newEntry.amount ===  null) newEntry.amount = 0
 
       const { error } = await supabase
@@ -182,6 +190,12 @@ export const useStoreEntries = defineStore('entries', () => {
     helpers
   */
   
+    const generateOrderNumber = () => {
+      // return a new order number
+      const orderNumbers = entries.value.map(entry => entry.order)
+      return Math.max(...orderNumbers) + 1
+    }
+
     const getEntryIndexById = entryId => {
       return entries.value.findIndex(entry => entry.id === entryId)
     }
