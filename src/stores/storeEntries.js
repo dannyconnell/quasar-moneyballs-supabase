@@ -179,12 +179,24 @@ export const useStoreEntries = defineStore('entries', () => {
     
     }
 
-    const updateEntryOrderNumbers = () => {
+    const updateEntryOrderNumbers = async () => {
       let currentOrder = 1
       entries.value.forEach(entry => {
         entry.order = currentOrder
         currentOrder++
       })
+
+      const entriesUpsert = entries.value.map(entry => {
+        return { id: entry.id, order: entry.order }
+      })
+
+      const { error } = await supabase
+        .from('entries')
+        .upsert(entriesUpsert)
+        .select()
+
+      if (error) useShowErrorMessage('Could not update entry order numbers on Supabase')
+    
     }
 
     const sortEnd = ({ oldIndex, newIndex }) => {
