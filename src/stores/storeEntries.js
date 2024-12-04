@@ -179,10 +179,19 @@ export const useStoreEntries = defineStore('entries', () => {
     
     }
 
+    const updateEntryOrderNumbers = () => {
+      let currentOrder = 1
+      entries.value.forEach(entry => {
+        entry.order = currentOrder
+        currentOrder++
+      })
+    }
+
     const sortEnd = ({ oldIndex, newIndex }) => {
       const movedEntry = entries.value[oldIndex]
       entries.value.splice(oldIndex, 1)
       entries.value.splice(newIndex, 0, movedEntry)
+      updateEntryOrderNumbers()
     }
 
 

@@ -28,7 +28,7 @@
           { 'text-strike' : entry.paid }
         ]"
       >
-        {{ entry.name }}
+        {{ entry.name }} ({{ entry.order }})
         <q-popup-edit
           @save="onNameUpdate"
           :model-value="entry.name"
