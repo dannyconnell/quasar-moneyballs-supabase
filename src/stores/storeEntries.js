@@ -191,9 +191,11 @@ export const useStoreEntries = defineStore('entries', () => {
   */
   
     const generateOrderNumber = () => {
-      // return a new order number
-      const orderNumbers = entries.value.map(entry => entry.order)
-      return Math.max(...orderNumbers) + 1
+      const orderNumbers = entries.value.map(entry => entry.order),
+            newOrderNumber = orderNumbers.length
+                             ? Math.max(...orderNumbers) + 1
+                             : 1
+      return newOrderNumber
     }
 
     const getEntryIndexById = entryId => {
