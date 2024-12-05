@@ -47,8 +47,8 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
       env: {
-        SUPABASE_URL: 'https://zdpcbsewhrmrohhkvdpm.supabase.co',
-        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpkcGNic2V3aHJtcm9oaGt2ZHBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI3ODc2MjUsImV4cCI6MjA0ODM2MzYyNX0.QwQds5ZrypeGk0TH938Fo4FLCkWmzovYrGv14gDgDes'
+        SUPABASE_URL: 'https://wewdmqlweyvgfayimpwy.supabase.co',
+        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indld2RtcWx3ZXl2Z2ZheWltcHd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzOTMzMzIsImV4cCI6MjA0ODk2OTMzMn0.eBdrctO6WyW1bv1KAEU9gHweojiz3ePluKPmfza2GuQ'
       },
       target: {
         browser: [ 'es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1' ],
