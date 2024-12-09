@@ -109,7 +109,7 @@ export const useStoreEntries = defineStore('entries', () => {
             }
             if (payload.eventType === 'DELETE') {
               const index = getEntryIndexById(payload.old.id)
-              entries.value.splice(index)
+              entries.value.splice(index, 1)
             }
             if (payload.eventType === 'UPDATE') {
               const index = getEntryIndexById(payload.new.id)
