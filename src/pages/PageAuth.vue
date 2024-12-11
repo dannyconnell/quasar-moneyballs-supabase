@@ -105,6 +105,18 @@
           message: 'Please enter an email & password motherflipper!'
         })
       }
+      else {
+        formSubmitSuccess()
+      }
+    }
+
+    const formSubmitSuccess = () => {
+      if (tab.value === 'register') {
+        console.log('Register user with these credentials:', credentials)
+      }
+      else {
+        console.log('Login user with these credentials:', credentials)
+      }
     }
 
 </script>
