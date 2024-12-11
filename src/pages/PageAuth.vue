@@ -39,7 +39,7 @@
             to="/"
             class="full-width"
             color="white"
-            label="Submit"
+            :label="submitButtonTitle"
             outline
             no-caps
           />
@@ -56,7 +56,7 @@
     imports
   */
   
-    import { ref } from 'vue'
+    import { ref, computed } from 'vue'
     import { useLightOrDark } from 'src/use/useLightOrDark'
     import ToolbarTitle from 'src/components/Layout/ToolbarTitle.vue'
 
@@ -66,5 +66,14 @@
   */
   
     const tab = ref('login')
+
+  
+  /*
+    submit button title
+  */
+  
+    const submitButtonTitle = computed(() => {
+      return tab.value === 'login' ? 'Login' : 'Register'
+    })
 
 </script>
