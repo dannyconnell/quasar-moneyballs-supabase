@@ -21,7 +21,7 @@
         <q-form>
           <q-input
             class="q-mb-md"
-            bg-color="white"
+            :bg-color="useLightOrDark('white', 'black')"
             label="Email"
             type="email"
             autocomplete="email"
@@ -29,7 +29,7 @@
           />
           <q-input
             class="q-mb-md"
-            bg-color="white"
+            :bg-color="useLightOrDark('white', 'black')"
             label="Password"
             type="password"
             autocomplete="current-password"
@@ -57,7 +57,8 @@
   */
   
     import { ref } from 'vue'
-    import ToolbarTitle from 'src/components/Layout/ToolbarTitle.vue';
+    import { useLightOrDark } from 'src/use/useLightOrDark'
+    import ToolbarTitle from 'src/components/Layout/ToolbarTitle.vue'
 
 
   /*
