@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
 import supabase from 'src/config/supabase'
 import { useShowErrorMessage } from 'src/use/useShowErrorMessage'
@@ -24,15 +25,19 @@ export const useStoreAuth = defineStore('auth', () => {
   */
   
     const init = () => {
+      const router = useRouter()
+
       supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
           if (session !== null) {
             userDetails.id = session.user.id
             userDetails.email = session.user.email
+            router.push('/')
           }
         } 
         else if (event === 'SIGNED_OUT') {
           Object.assign(userDetails, userDetailsDefault)
+          router.replace('/auth')
         }
       })
     }
