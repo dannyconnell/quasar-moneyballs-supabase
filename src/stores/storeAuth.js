@@ -19,6 +19,12 @@ export const useStoreAuth = defineStore('auth', () => {
       if (data) console.log('data: ', data)
 
     }
+
+    const logoutUser = async () => {
+      let { error } = await supabase.auth.signOut()
+      if (error) useShowErrorMessage(error.message)
+      else console.log('User was signed out')
+    }
     
 
   /*
@@ -28,7 +34,8 @@ export const useStoreAuth = defineStore('auth', () => {
     return { 
 
       // actions
-      registerUser
+      registerUser,
+      logoutUser
 
     }
     
