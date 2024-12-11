@@ -61,9 +61,17 @@
   */
   
     import { ref, computed, reactive } from 'vue'
+    import { useRouter } from 'vue-router'
     import { useQuasar } from 'quasar'
     import { useLightOrDark } from 'src/use/useLightOrDark'
     import ToolbarTitle from 'src/components/Layout/ToolbarTitle.vue'
+
+
+  /*
+    router
+  */
+  
+    const router = useRouter()  
 
 
   /*
@@ -117,6 +125,7 @@
       else {
         console.log('Login user with these credentials:', credentials)
       }
+      router.push('/')
     }
 
 </script>
