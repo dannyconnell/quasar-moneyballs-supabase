@@ -18,7 +18,9 @@
       </q-card-section>
 
       <q-card-section>
-        <q-form>
+        <q-form
+          @submit="formSubmit"
+        >
           <q-input
             v-model="credentials.email"
             class="q-mb-md"
@@ -38,9 +40,9 @@
             filled
           />
           <q-btn
-            to="/"
             class="full-width"
             color="white"
+            type="submit"
             :label="submitButtonTitle"
             outline
             no-caps
@@ -87,5 +89,9 @@
       email: '',
       password: ''
     })
+
+    const formSubmit = () => {
+      console.log('form submitted')
+    }
 
 </script>
