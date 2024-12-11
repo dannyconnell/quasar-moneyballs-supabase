@@ -20,6 +20,7 @@
       <q-card-section>
         <q-form>
           <q-input
+            v-model="credentials.email"
             class="q-mb-md"
             :bg-color="useLightOrDark('white', 'black')"
             label="Email"
@@ -28,6 +29,7 @@
             filled
           />
           <q-input
+            v-model="credentials.password"
             class="q-mb-md"
             :bg-color="useLightOrDark('white', 'black')"
             label="Password"
@@ -56,7 +58,7 @@
     imports
   */
   
-    import { ref, computed } from 'vue'
+    import { ref, computed, reactive } from 'vue'
     import { useLightOrDark } from 'src/use/useLightOrDark'
     import ToolbarTitle from 'src/components/Layout/ToolbarTitle.vue'
 
@@ -74,6 +76,16 @@
   
     const submitButtonTitle = computed(() => {
       return tab.value === 'login' ? 'Login' : 'Register'
+    })
+
+
+  /*
+    form
+  */
+  
+    const credentials = reactive({
+      email: '',
+      password: ''
     })
 
 </script>
