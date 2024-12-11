@@ -61,8 +61,16 @@
   */
   
     import { ref, computed, reactive } from 'vue'
+    import { useQuasar } from 'quasar'
     import { useLightOrDark } from 'src/use/useLightOrDark'
     import ToolbarTitle from 'src/components/Layout/ToolbarTitle.vue'
+
+
+  /*
+    quasar
+  */
+  
+    const $q = useQuasar()  
 
 
   /*
@@ -91,7 +99,12 @@
     })
 
     const formSubmit = () => {
-      console.log('form submitted')
+      if (!credentials.email || !credentials.password) {
+        $q.dialog({
+          title: 'Error',
+          message: 'Please enter an email & password motherflipper!'
+        })
+      }
     }
 
 </script>
