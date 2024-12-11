@@ -37,6 +37,17 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 
 - Click **Save**
 
+### Setup Authentication
+
+- Go to the Supabase dashboard
+- Click on **Authentication** on the left
+- Click on **Providers** 
+- Ensure that **Email** is enabled
+- Click on **Email** to show the dropdown options
+- Ensure that **Confirm email** is **disabled**
+
+![Setup Authentication](https://github.com/user-attachments/assets/7eae70ae-78b3-48f2-b44e-e90ab5775f2e)
+
 ### Add Supabase Config to Moneyballs
 
 - On the left, click **Home**
