@@ -26,12 +26,13 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - For the **id** column, change the **Type** to **uuid**
 - Add the following columns (by clicking **Add column**):
 
-| Name   | Type   | Default Value
-| ------ | ------ | --- |
-| name   | text   | (leave empty) |
-| amount | float4 | 0 |
-| paid   | bool   | false |
-| order  | int8   | 1 |
+| Name    | Type   | Default Value
+| ------- | ------ | --- |
+| name    | text   | (leave empty) |
+| amount  | float4 | 0 |
+| paid    | bool   | false |
+| order   | int8   | 1 |
+| user_id | uuid   | gen_random_uuid() |
 
 ![Supabase - Create Entries Table](https://github.com/user-attachments/assets/52effa7d-178c-4058-880f-be6ceed5cb7f)
 
