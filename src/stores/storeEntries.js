@@ -135,6 +135,10 @@ export const useStoreEntries = defineStore('entries', () => {
         )
         .subscribe()
     }
+    
+    const clearEntries = () => {
+      entries.value = []
+    }
 
     const addEntry = async addEntryForm => {
       const storeAuth = useStoreAuth()
@@ -267,6 +271,7 @@ export const useStoreEntries = defineStore('entries', () => {
 
       // actions
       loadEntries,
+      clearEntries,
       addEntry,
       deleteEntry,
       updateEntry,
