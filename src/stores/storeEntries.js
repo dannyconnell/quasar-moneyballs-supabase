@@ -137,9 +137,12 @@ export const useStoreEntries = defineStore('entries', () => {
     }
 
     const addEntry = async addEntryForm => {
+      const storeAuth = useStoreAuth()
+
       const newEntry = Object.assign({}, addEntryForm, { 
         paid: false,
-        order: generateOrderNumber()
+        order: generateOrderNumber(),
+        user_id: storeAuth.userDetails.id
       })
       if (newEntry.amount ===  null) newEntry.amount = 0
 
