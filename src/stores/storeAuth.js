@@ -41,6 +41,7 @@ export const useStoreAuth = defineStore('auth', () => {
         else if (event === 'SIGNED_OUT') {
           Object.assign(userDetails, userDetailsDefault)
           router.replace('/auth')
+          storeEntries.unsubscribeEntries()
           storeEntries.clearEntries()
         }
       })

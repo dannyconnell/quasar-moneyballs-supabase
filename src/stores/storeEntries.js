@@ -6,6 +6,8 @@ import { useShowErrorMessage } from 'src/use/useShowErrorMessage'
 import { useNonReactiveCopy } from 'src/use/useNonReactiveCopy'
 import supabase from 'src/config/supabase'
 
+let entriesChannel
+
 export const useStoreEntries = defineStore('entries', () => {
 
   /*
@@ -110,7 +112,7 @@ export const useStoreEntries = defineStore('entries', () => {
     const subscribeEntries = () => {
       const storeAuth = useStoreAuth()
 
-      supabase.channel('entries-channel')
+      entriesChannel = supabase.channel('entries-channel')
         .on(
           'postgres_changes',
           { 
@@ -136,6 +138,10 @@ export const useStoreEntries = defineStore('entries', () => {
         .subscribe()
     }
     
+    const unsubscribeEntries = () => {
+      supabase.removeChannel(entriesChannel)
+    }
+
     const clearEntries = () => {
       entries.value = []
     }
@@ -271,6 +277,7 @@ export const useStoreEntries = defineStore('entries', () => {
 
       // actions
       loadEntries,
+      unsubscribeEntries,
       clearEntries,
       addEntry,
       deleteEntry,
