@@ -108,11 +108,17 @@ export const useStoreEntries = defineStore('entries', () => {
     }
 
     const subscribeEntries = () => {
+      const storeAuth = useStoreAuth()
 
       supabase.channel('entries-channel')
         .on(
           'postgres_changes',
-          { event: '*', schema: 'public', table: 'entries' },
+          { 
+            event: '*',
+            schema: 'public',
+            table: 'entries',
+            filter: `user_id=eq.${ storeAuth.userDetails.id }`
+          },
           (payload) => {
             if (payload.eventType === 'INSERT') {
               entries.value.push(payload.new)
