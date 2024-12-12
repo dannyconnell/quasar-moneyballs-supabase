@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, reactive, nextTick } from 'vue'
 import { Notify } from 'quasar'
+import { useStoreAuth } from 'src/stores/storeAuth'
 import { useShowErrorMessage } from 'src/use/useShowErrorMessage'
 import { useNonReactiveCopy } from 'src/use/useNonReactiveCopy'
 import supabase from 'src/config/supabase'
@@ -87,11 +88,14 @@ export const useStoreEntries = defineStore('entries', () => {
   
     const loadEntries = async () => {
 
+      const storeAuth = useStoreAuth()
+
       entriesLoaded.value = false
 
       let { data, error } = await supabase
         .from('entries')
         .select('*')
+        .eq('user_id', storeAuth.userDetails.id)
         .order('order', { ascending: true })
 
       if (error) useShowErrorMessage(error.message)

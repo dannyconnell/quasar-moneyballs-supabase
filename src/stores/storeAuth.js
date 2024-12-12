@@ -2,6 +2,7 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
 import supabase from 'src/config/supabase'
+import { useStoreEntries } from 'src/stores/storeEntries'
 import { useShowErrorMessage } from 'src/use/useShowErrorMessage'
 
 export const useStoreAuth = defineStore('auth', () => {
@@ -25,7 +26,8 @@ export const useStoreAuth = defineStore('auth', () => {
   */
   
     const init = () => {
-      const router = useRouter()
+      const router = useRouter(),
+            storeEntries = useStoreEntries()
 
       supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
@@ -33,6 +35,7 @@ export const useStoreAuth = defineStore('auth', () => {
             userDetails.id = session.user.id
             userDetails.email = session.user.email
             router.push('/')
+            storeEntries.loadEntries()
           }
         } 
         else if (event === 'SIGNED_OUT') {
