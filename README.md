@@ -21,7 +21,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - On the left, click **Tables**
 - Click **New table**
 - In Name, enter **entries**
-- Disable **Enable Row Level Security (RLS)**
+- Make sure **Enable Row Level Security (RLS)** is enabled
 - Enable **Enable Realtime**
 - For the **id** column, change the **Type** to **uuid**
 - Add the following columns (by clicking **Add column**):
@@ -37,6 +37,45 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 ![Supabase - Create Entries Table](https://github.com/user-attachments/assets/52effa7d-178c-4058-880f-be6ceed5cb7f)
 
 - Click **Save**
+
+### Create RLS Policies
+
+- Go to **Database** > **Policies**
+
+#### SELECT Policy
+
+- Click on **Create policy**
+- Under **Policy Command** click on **SELECT**
+- Under **Templates**, scroll down & click on **SELECT - Enable users to view their own data only**
+- Click on **Save Policy**
+
+#### INSERT Policy
+
+- Click on **Create policy**
+- Under **Policy Command** click on **INSERT**
+- Under **Templates**, click on **INSERT - Enable insert for users based on user_id**
+- Click on **Save Policy**
+
+#### DELETE Policy
+
+- Click on **Create policy**
+- Under **Policy Command** click on **DELETE**
+- Under **Templates**, click on **INSERT - Enable delete for users based on user_id**
+- Click on **Save Policy**
+
+#### UPDATE Policy
+
+- Click on **Create policy**
+- Under **Policy Command** click on **UPDATE**
+- Set **Policy name** to **Enable update for users based on user_id**
+- Under **Target Roles** choose **authenticated**
+- Add this line to both the **using** block AND the **with check** blocks (you can copy this from the **DELETE** policy if you edit it):
+
+```(( SELECT auth.uid() AS uid) = user_id)```
+
+- Click on **Save Policy**
+
+
 
 ### Setup Authentication
 

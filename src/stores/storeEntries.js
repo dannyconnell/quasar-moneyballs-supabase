@@ -98,6 +98,7 @@ export const useStoreEntries = defineStore('entries', () => {
         .from('entries')
         .select('*')
         .eq('user_id', storeAuth.userDetails.id)
+        // .eq('user_id', 'd593b8e1-80d2-4142-b1b8-be8905534ae0')
         .order('order', { ascending: true })
 
       if (error) useShowErrorMessage(error.message)
@@ -153,6 +154,7 @@ export const useStoreEntries = defineStore('entries', () => {
         paid: false,
         order: generateOrderNumber(),
         user_id: storeAuth.userDetails.id
+        // user_id: 'd593b8e1-80d2-4142-b1b8-be8905534ae0'
       })
       if (newEntry.amount ===  null) newEntry.amount = 0
 
