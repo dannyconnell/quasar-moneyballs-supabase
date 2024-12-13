@@ -205,6 +205,8 @@ export const useStoreEntries = defineStore('entries', () => {
     }
 
     const updateEntryOrderNumbers = async () => {
+      const storeAuth = useStoreAuth()
+
       let currentOrder = 1
       entries.value.forEach(entry => {
         entry.order = currentOrder
@@ -212,7 +214,11 @@ export const useStoreEntries = defineStore('entries', () => {
       })
 
       const entriesUpsert = entries.value.map(entry => {
-        return { id: entry.id, order: entry.order }
+        return { 
+          id: entry.id,
+          user_id: storeAuth.userDetails.id,
+          order: entry.order
+        }
       })
 
       const { error } = await supabase
