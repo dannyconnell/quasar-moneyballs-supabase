@@ -7,6 +7,13 @@
         <ToolbarTitle />
       </q-card-section>
 
+      <q-card-section class="q-pb-none">
+        <q-banner class="entries-count bg-primary text-white text-center text-italic">
+          <div>Over 999 Entries have been</div>
+          <div>created with Moneyballs!</div>
+        </q-banner>
+      </q-card-section>
+
       <q-card-section>
         <q-tabs
           v-model="tab"
