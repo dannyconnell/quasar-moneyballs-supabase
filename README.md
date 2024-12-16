@@ -75,7 +75,22 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 
 - Click on **Save Policy**
 
+### Stats Table
 
+- Go to **Database** > **Tables** > **New table**
+- Set the name to **stats**
+- Disable **Enable Row Level Security (RLS)**
+- Add the following columns (by clicking **Add column**):
+
+| Name    | Type   | Default Value
+| ------- | ------ | --- |
+| name    | text   | (leave empty) |
+| value   | int8   | 0 |
+
+- Click the 3 dots next to **stats** table > **View in Table Editor**
+- Click **Insert** > **Insert row**
+- Set the **name** to **entries_count**
+- Set the **value** to **0**
 
 ### Setup Authentication
 
