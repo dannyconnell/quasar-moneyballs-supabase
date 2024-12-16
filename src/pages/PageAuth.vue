@@ -8,7 +8,10 @@
       </q-card-section>
 
       <q-card-section class="q-pb-none">
-        <q-banner class="entries-count bg-primary text-white text-center text-italic">
+        <q-banner
+          :class="{ 'fade-in' : entriesCount }"
+          class="entries-count bg-primary text-white text-center text-italic"
+        >
           <div>Over {{ entriesCount }} Entries have been</div>
           <div>created with Moneyballs!</div>
         </q-banner>
