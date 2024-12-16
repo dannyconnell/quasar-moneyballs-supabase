@@ -9,7 +9,7 @@
 
       <q-card-section class="q-pb-none">
         <q-banner class="entries-count bg-primary text-white text-center text-italic">
-          <div>Over 999 Entries have been</div>
+          <div>Over {{ entriesCount }} Entries have been</div>
           <div>created with Moneyballs!</div>
         </q-banner>
       </q-card-section>
@@ -67,10 +67,12 @@
     imports
   */
   
-    import { ref, computed, reactive } from 'vue'
+    import { ref, computed, reactive, onMounted } from 'vue'
     import { useQuasar } from 'quasar'
+    import supabase from 'src/config/supabase'
     import { useStoreAuth } from 'src/stores/storeAuth'
     import { useLightOrDark } from 'src/use/useLightOrDark'
+    import { useShowErrorMessage } from 'src/use/useShowErrorMessage'
     import ToolbarTitle from 'src/components/Layout/ToolbarTitle.vue'
 
 
@@ -87,6 +89,24 @@
   
     const $q = useQuasar()  
 
+
+  /*
+    entries count
+  */
+  
+    const entriesCount = ref(null)
+
+    onMounted(async () => {
+      let { data: stats, error } = await supabase
+        .from('stats')
+        .select("*")
+        .eq('name', 'entries_count')
+
+      if (error) useShowErrorMessage(error.message)
+      if (stats) {
+        entriesCount.value = stats[0].value
+      }
+    })
 
   /*
     tabs
