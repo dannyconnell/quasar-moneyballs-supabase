@@ -137,12 +137,26 @@ END;
 
 ### Create Storage Bucket (Avatars)
 
+#### Create Bucket
+
 - Go to **Storage** > **New bucket**
 - Set **Name of bucket** to **avatars**
 - Check **Public bucket**
 - Click **Additional configuration**
 - Set **Allowed MIME types** to **image/jpeg, image/png**
 - Click **Save**
+
+#### Create Storage Policies
+
+- Go to **Storage** > **Policies**
+- On **avatars** bucket, click **New policy**
+- Click **Get started quickly**
+- Choose **Give users access to only their own top level folder named as uid**
+- Click **Use this template**
+- Next to **Allowed operation** check all (SELECT, INSERT, UPDATE & DELETE)
+- Next to **Target roles**, choose **authenticated**
+- Click **Review**
+- Click **Save policy**
 
 
 ### Add Supabase Config to Moneyballs
