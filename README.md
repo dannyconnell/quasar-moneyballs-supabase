@@ -94,22 +94,34 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 
 ### Create Database Function (increment_entries_count)
 
-- Go to **SQL Editor** > **Templates**
-- Click the **Increment field value** example
-- Update the code to:
+- Click on **Create a new function**
+- Set **Name of function** to **increment_entries_count**
+- Set **Return type** to **trigger**
+- Set **Definition** to:
 
 ```
-create function increment_entries_count()
-returns void as
-$$
+BEGIN
   update public.stats
   set value = value + 1
   where name = 'entries_count';
-$$
-language sql volatile;
+  RETURN null;
+END;
 ```
 
-- Click **Run** to create the function
+- Click **Confirm**
+
+### Create Database Trigger (entry_inserted)
+
+- Go to **Database** > **Triggers**
+- Click **Create a new trigger**
+- Set **Name of trigger** to **entry_inserted**
+- Set **Table** to **entries**
+- Next to **Events** check **Insert**
+- Set **Trigger type** to **After the event**
+- Click on **Choose a function to trigger**
+- Click on our function **increment_entries_count**
+- Click **Confirm**
+
 
 ### Setup Authentication
 

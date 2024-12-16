@@ -166,13 +166,11 @@ export const useStoreEntries = defineStore('entries', () => {
         .select()
 
       if (error) useShowErrorMessage('Could not add entry to Supabase')
-      else {
-        updateEntriesCount()
-      }
     
     }
 
     const updateEntriesCount = async () => {
+      // NOTE: not used - here as an example of how to fire a database function
       const { error } = await supabase.rpc('increment_entries_count')
 
       if (error) useShowErrorMessage('Could not increment entries count')
