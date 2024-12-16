@@ -14,6 +14,18 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 
 ![Supabase - Create new project](https://github.com/user-attachments/assets/e3f6b47e-41ed-4c8a-acf6-80231e114fd6)
 
+### Setup Authentication
+
+- Go to the Supabase dashboard
+- Click on **Authentication** on the left
+- Click on **Providers** 
+- Ensure that **Email** is enabled
+- Click on **Email** to show the dropdown options
+- Ensure that **Confirm email** is **disabled**
+
+![Setup Authentication](https://github.com/user-attachments/assets/7eae70ae-78b3-48f2-b44e-e90ab5775f2e)
+
+
 ### Create Entries Table
 
 - Wait til your project is created
@@ -123,16 +135,15 @@ END;
 - Click **Confirm**
 
 
-### Setup Authentication
+### Create Storage Bucket (Avatars)
 
-- Go to the Supabase dashboard
-- Click on **Authentication** on the left
-- Click on **Providers** 
-- Ensure that **Email** is enabled
-- Click on **Email** to show the dropdown options
-- Ensure that **Confirm email** is **disabled**
+- Go to **Storage** > **New bucket**
+- Set **Name of bucket** to **avatars**
+- Check **Public bucket**
+- Click **Additional configuration**
+- Set **Allowed MIME types** to **image/jpeg, image/png**
+- Click **Save**
 
-![Setup Authentication](https://github.com/user-attachments/assets/7eae70ae-78b3-48f2-b44e-e90ab5775f2e)
 
 ### Add Supabase Config to Moneyballs
 
