@@ -92,6 +92,25 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - Set the **name** to **entries_count**
 - Set the **value** to **0**
 
+### Create Database Function (increment_entries_count)
+
+- Go to **SQL Editor** > **Templates**
+- Click the **Increment field value** example
+- Update the code to:
+
+```
+create function increment_entries_count()
+returns void as
+$$
+  update public.stats
+  set value = value + 1
+  where name = 'entries_count';
+$$
+language sql volatile;
+```
+
+- Click **Run** to create the function
+
 ### Setup Authentication
 
 - Go to the Supabase dashboard
