@@ -104,6 +104,19 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - Set the **name** to **entries_count**
 - Set the **value** to **0**
 
+### Profiles Table
+
+- Go to **Database** > **Tables** > **New table**
+- Set the name to **profiles**
+- Disable **Enable Row Level Security (RLS)**
+- Set **id** type to **uuid**
+- Add the following column (by clicking **Add column**):
+
+| Name            | Type   | Default Value
+| --------------- | ------ | --- |
+| avatar_filename | text   | (leave empty) |
+
+
 ### Create Database Function (increment_entries_count)
 
 - Click on **Create a new function**
