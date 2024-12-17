@@ -29,9 +29,12 @@ export const useStoreSettings = defineStore('settings', () => {
     })
 
     // profile
-    const profile = reactive({
+    const profileDefault = {
       avatarFile: null,
       avatarUrl: null
+    }
+    const profile = reactive({
+      ...profileDefault
     })
 
 
@@ -113,6 +116,10 @@ export const useStoreSettings = defineStore('settings', () => {
 
     }
 
+    const resetProfile = () => {
+      Object.assign(profile, profileDefault)
+    }
+
 
   /*
     return
@@ -129,7 +136,8 @@ export const useStoreSettings = defineStore('settings', () => {
       // actions
       loadSettings,
       uploadAvatar,
-      getAvatarUrl
+      getAvatarUrl,
+      resetProfile
 
     }
     

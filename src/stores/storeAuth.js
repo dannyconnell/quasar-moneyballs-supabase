@@ -36,8 +36,7 @@ export const useStoreAuth = defineStore('auth', () => {
           if (session !== null) {
             userDetails.id = session.user.id
             userDetails.email = session.user.email
-            // router.push('/') // TODO: put this back
-            router.push('/settings')
+            router.push('/') 
             storeSettings.getAvatarUrl()
             storeEntries.loadEntries()
           }
@@ -45,6 +44,7 @@ export const useStoreAuth = defineStore('auth', () => {
         else if (event === 'SIGNED_OUT') {
           Object.assign(userDetails, userDetailsDefault)
           router.replace('/auth')
+          storeSettings.resetProfile()
           storeEntries.unsubscribeEntries()
           storeEntries.clearEntries()
         }
