@@ -65,7 +65,27 @@ export const useStoreSettings = defineStore('settings', () => {
         .upload(`${ folderPath }/${ fileName }`, file)
 
       if (error) useShowErrorMessage(error.message)
-      if (data) console.log(data)
+      if (data) {
+        const avatarFilename = data.fullPath.split('/').pop()
+        saveAvatarFilename(avatarFilename)
+      }
+      
+    }
+
+    const saveAvatarFilename = async avatarFilename => {
+
+      const storeAuth = useStoreAuth()
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .upsert({
+          id: storeAuth.userDetails.id, 
+          avatar_filename: avatarFilename 
+        })
+        .select()
+
+      if (error) useShowErrorMessage('Could not upsert row on profiles table.')
+      if (data) console.log('data: ', data)
       
     }
 
