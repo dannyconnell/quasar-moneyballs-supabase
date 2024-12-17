@@ -30,7 +30,8 @@ export const useStoreSettings = defineStore('settings', () => {
 
     // profile
     const profile = reactive({
-      avatarFile: null
+      avatarFile: null,
+      avatarUrl: null
     })
 
 
@@ -103,10 +104,10 @@ export const useStoreSettings = defineStore('settings', () => {
       if (error) useShowErrorMessage('Could not get Avatar URL from Supabase.')
         if (profiles) {
           if (profiles[0]?.avatar_filename) {
-            const avatarFilename = profiles[0].avatar_filename,
-                  avatarUrl = `https://wewdmqlweyvgfayimpwy.supabase.co/storage/v1/object/public/avatars/${ storeAuth.userDetails.id }/${ avatarFilename }`
+            const avatarFilename = profiles[0].avatar_filename
 
-                  console.log('avatarUrl: ', avatarUrl)
+            profile.avatarUrl = `https://wewdmqlweyvgfayimpwy.supabase.co/storage/v1/object/public/avatars/${ storeAuth.userDetails.id }/${ avatarFilename }`
+
           }
       }
 
@@ -127,7 +128,8 @@ export const useStoreSettings = defineStore('settings', () => {
 
       // actions
       loadSettings,
-      uploadAvatar
+      uploadAvatar,
+      getAvatarUrl
 
     }
     

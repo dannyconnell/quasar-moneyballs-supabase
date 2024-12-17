@@ -18,7 +18,12 @@
               dense
             >
               <template v-slot:prepend>
-                <q-icon name="attach_file" />
+                <q-avatar
+                  v-if="storeSettings.profile.avatarUrl"
+                >
+                  <img :src="storeSettings.profile.avatarUrl">
+                </q-avatar>
+                <q-icon v-else name="attach_file" />
               </template>
             </q-file>
           </q-item-section>

@@ -60,7 +60,13 @@
           <q-item-section
             avatar
           >
-            <q-icon name="logout" />
+            <q-avatar
+              v-if="storeSettings.profile.avatarUrl"
+              size="24px"
+            >
+              <img :src="storeSettings.profile.avatarUrl">
+            </q-avatar>
+            <q-icon v-else name="logout" />
           </q-item-section>
 
           <q-item-section>
@@ -106,6 +112,7 @@ import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { useStoreEntries } from 'src/stores/storeEntries'
 import { useStoreAuth } from 'src/stores/storeAuth'
+import { useStoreSettings } from 'src/stores/storeSettings'
 import { useLightOrDark } from 'src/use/useLightOrDark'
 import ToolbarTitle from 'components/Layout/ToolbarTitle.vue'
 import NavLink from 'components/Nav/NavLink.vue'
@@ -116,7 +123,8 @@ defineOptions({
 
 const $q = useQuasar(),
       storeEntries = useStoreEntries(),
-      storeAuth = useStoreAuth()
+      storeAuth = useStoreAuth(),
+      storeSettings = useStoreSettings()
 
 const navLinks = [
   {

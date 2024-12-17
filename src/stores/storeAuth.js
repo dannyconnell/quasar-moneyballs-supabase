@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
 import supabase from 'src/config/supabase'
 import { useStoreEntries } from 'src/stores/storeEntries'
+import { useStoreSettings } from 'src/stores/storeSettings'
 import { useShowErrorMessage } from 'src/use/useShowErrorMessage'
 
 export const useStoreAuth = defineStore('auth', () => {
@@ -27,7 +28,8 @@ export const useStoreAuth = defineStore('auth', () => {
   
     const init = () => {
       const router = useRouter(),
-            storeEntries = useStoreEntries()
+            storeEntries = useStoreEntries(),
+            storeSettings = useStoreSettings()
 
       supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
@@ -36,6 +38,7 @@ export const useStoreAuth = defineStore('auth', () => {
             userDetails.email = session.user.email
             // router.push('/') // TODO: put this back
             router.push('/settings')
+            storeSettings.getAvatarUrl()
             storeEntries.loadEntries()
           }
         } 
