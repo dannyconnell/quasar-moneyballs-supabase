@@ -34,7 +34,8 @@ export const useStoreAuth = defineStore('auth', () => {
           if (session !== null) {
             userDetails.id = session.user.id
             userDetails.email = session.user.email
-            router.push('/')
+            // router.push('/') // TODO: put this back
+            router.push('/settings')
             storeEntries.loadEntries()
           }
         } 

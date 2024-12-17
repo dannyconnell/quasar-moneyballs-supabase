@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { reactive, watch } from 'vue'
 import { Dark, LocalStorage } from 'quasar'
+import supabase from 'src/config/supabase'
 
 export const useStoreSettings = defineStore('settings', () => {
 
@@ -50,6 +51,10 @@ export const useStoreSettings = defineStore('settings', () => {
       if (savedSettings) Object.assign(settings, savedSettings)
     }
 
+    const uploadAvatar = async file => {
+      console.log('upload file:', file)
+    }
+
 
   /*
     return
@@ -64,7 +69,8 @@ export const useStoreSettings = defineStore('settings', () => {
       // getters
 
       // actions
-      loadSettings
+      loadSettings,
+      uploadAvatar
 
     }
     

@@ -12,6 +12,7 @@
           <q-item-section side >
             <q-file
               v-model="storeSettings.profile.avatarFile"
+              @update:model-value="storeSettings.uploadAvatar"
               label="Upload Avatar"
               outlined
               dense
