@@ -85,8 +85,31 @@ export const useStoreSettings = defineStore('settings', () => {
         .select()
 
       if (error) useShowErrorMessage('Could not upsert row on profiles table.')
-      if (data) console.log('data: ', data)
+      if (data) {
+        getAvatarUrl()
+      }
       
+    }
+
+    const getAvatarUrl = async () => {
+
+      const storeAuth = useStoreAuth()
+
+      let { data: profiles, error } = await supabase
+        .from('profiles')
+        .select("*")
+        .eq('id', storeAuth.userDetails.id)
+
+      if (error) useShowErrorMessage('Could not get Avatar URL from Supabase.')
+        if (profiles) {
+          if (profiles[0]?.avatar_filename) {
+            const avatarFilename = profiles[0].avatar_filename,
+                  avatarUrl = `https://wewdmqlweyvgfayimpwy.supabase.co/storage/v1/object/public/avatars/${ storeAuth.userDetails.id }/${ avatarFilename }`
+
+                  console.log('avatarUrl: ', avatarUrl)
+          }
+      }
+
     }
 
 
