@@ -25,6 +25,11 @@ export const useStoreSettings = defineStore('settings', () => {
       saveSettings()
     })
 
+    // profile
+    const profile = reactive({
+      avatarFile: null
+    })
+
 
   /*
     getters
@@ -54,6 +59,7 @@ export const useStoreSettings = defineStore('settings', () => {
 
       // state
       settings,
+      profile,
 
       // getters
 
