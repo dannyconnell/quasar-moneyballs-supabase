@@ -111,7 +111,7 @@ export const useStoreSettings = defineStore('settings', () => {
         if (profiles[0]?.avatar_filename) {
           const avatarFilename = profiles[0].avatar_filename
 
-          profile.avatarUrl = `https://wewdmqlweyvgfayimpwy.supabase.co/storage/v1/object/public/avatars/${ storeAuth.userDetails.id }/${ avatarFilename }`
+          profile.avatarUrl = `${ process.env.SUPABASE_URL }/storage/v1/object/public/avatars/${ storeAuth.userDetails.id }/${ avatarFilename }`
 
         }
       }
