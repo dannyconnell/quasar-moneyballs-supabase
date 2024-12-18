@@ -33,6 +33,7 @@
           <q-item-section>
             <q-input
               v-model="storeSettings.profile.bio"
+              @blur="storeSettings.saveBio"
               label="Bio"
               v-select-all
               outlined

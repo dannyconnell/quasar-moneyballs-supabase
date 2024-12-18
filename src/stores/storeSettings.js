@@ -106,15 +106,51 @@ export const useStoreSettings = defineStore('settings', () => {
         .eq('id', storeAuth.userDetails.id)
 
       if (error) useShowErrorMessage('Could not get Avatar URL from Supabase.')
-        if (profiles) {
-          if (profiles[0]?.avatar_filename) {
-            const avatarFilename = profiles[0].avatar_filename
 
-            profile.avatarUrl = `https://wewdmqlweyvgfayimpwy.supabase.co/storage/v1/object/public/avatars/${ storeAuth.userDetails.id }/${ avatarFilename }`
+      if (profiles) {
+        if (profiles[0]?.avatar_filename) {
+          const avatarFilename = profiles[0].avatar_filename
 
-          }
+          profile.avatarUrl = `https://wewdmqlweyvgfayimpwy.supabase.co/storage/v1/object/public/avatars/${ storeAuth.userDetails.id }/${ avatarFilename }`
+
+        }
       }
 
+    }
+
+    const saveBio = async () => {
+      const storeAuth = useStoreAuth()
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .upsert({
+          id: storeAuth.userDetails.id, 
+          bio: profile.bio
+        })
+        .select()
+
+      if (error) useShowErrorMessage('Could not upsert Bio on profiles table.')
+      if (data) {
+        console.log('data: ', data)
+      }
+    }
+
+    const getBio = async () => {
+
+      const storeAuth = useStoreAuth()
+
+      let { data: profiles, error } = await supabase
+        .from('profiles')
+        .select("*")
+        .eq('id', storeAuth.userDetails.id)
+
+      if (error) useShowErrorMessage('Could not get Bio from Supabase.')
+
+      if (profiles) {
+        if (profiles[0]?.bio) {
+          profile.bio = profiles[0].bio
+        }
+      }
     }
 
     const resetProfile = () => {
@@ -138,6 +174,8 @@ export const useStoreSettings = defineStore('settings', () => {
       loadSettings,
       uploadAvatar,
       getAvatarUrl,
+      saveBio,
+      getBio,
       resetProfile
 
     }
