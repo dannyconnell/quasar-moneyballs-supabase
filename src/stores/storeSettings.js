@@ -31,7 +31,8 @@ export const useStoreSettings = defineStore('settings', () => {
     // profile
     const profileDefault = {
       avatarFile: null,
-      avatarUrl: null
+      avatarUrl: null,
+      bio: ''
     }
     const profile = reactive({
       ...profileDefault

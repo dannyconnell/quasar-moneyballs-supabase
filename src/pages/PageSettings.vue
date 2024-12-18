@@ -29,6 +29,17 @@
           </q-item-section>
         </q-item>
 
+        <q-item tag="label" v-ripple>
+          <q-item-section>
+            <q-input
+              v-model="storeSettings.profile.bio"
+              label="Bio"
+              v-select-all
+              outlined
+            />
+          </q-item-section>
+        </q-item>
+
         <q-separator spaced />
 
         <q-item-label header>Entries</q-item-label>
