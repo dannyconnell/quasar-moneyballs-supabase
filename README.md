@@ -115,6 +115,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 | Name            | Type   | Default Value
 | --------------- | ------ | --- |
 | avatar_filename | text   | (leave empty) |
+| bio             | text   | (leave empty) |
 
 
 ### Create Database Function (increment_entries_count)
@@ -203,4 +204,142 @@ npm install
 ### Start the app in development mode
 ```bash
 quasar dev
+```
+
+### Run Supabase Locally
+
+#### Setup Local Supabase Instance
+
+- [Install Docker](https://www.docker.com/) for your platform (with recommended settings)
+- Open a separate terminal (from the Quasar terminal)
+- Install Supabase CLI
+```
+npm install supabase –save-dev
+```
+- Login to Supabase:
+```
+npx supabase login
+```
+- Initialise local Supabase project (choose No to options):
+```
+npx supabase init
+```
+- Start the local instance:
+```
+npx supabase start
+```
+- Open the **Studio URL** that you'll see in the teriminal
+- Link local Supabase project to supabase.com project:
+```
+npx supabase link
+```
+- Select the correct project
+
+#### Import Tables
+
+- Generate initial structure migration file:
+```
+npx supabase db diff -f initial_structure –linked
+```
+- You should see the migration file here:
+```
+/supabase/migrations/[TIMESTAMP]_initial_structure.sql
+```
+- Run the migration file:
+```
+npx supabase db reset
+```
+
+#### Import Data
+
+- Generate the seed.sql file:
+```
+npx supabase db dump --data-only -f supabase/seed.sql --linked
+```
+- Import the data:
+```
+npx supabase db reset
+```
+
+#### Connect Moneyballs to Local Instance
+
+- Start and stop Supabase:
+```
+npx supabase stop
+npx supabase start
+```
+- Copy the local **API URL** and **anon key** from the terimal, e.g:
+
+```
+API URL: http://127.0.0.1:54321
+...
+anon key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+```
+
+- Setup local environment variables (in quasar.config.js), e.g:
+
+```
+/* eslint-env node */
+
+/*
+ * This file runs in a Node context (it's NOT transpiled by Babel), so use only
+ * the ES6 features that are supported by your Node version. https://node.green/
+ */
+
+// Configuration for your app
+// https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
+
+const isLocalSupabase = true
+```
+
+```
+    ...
+    build: {
+      env: {
+        SUPABASE_URL: isLocalSupabase
+          ? 'http://127.0.0.1:54321'
+          : 'https://bngflwyejhhuvheveneb.supabase.co'
+        ,
+        SUPABASE_ANON_KEY: isLocalSupabase
+          ? 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'
+          : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuZ2Zsd3llamhodXZoZXZlbmViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAxMTI5NjcsImV4cCI6MjA0NTY4ODk2N30.4l8O1YzddSF7pAYcQkuodfp6uMJrtHuV_VTrMp1Hqk8'
+      },
+      ...
+    }
+```
+
+#### Enable Realtime for Entries Table
+
+- Local dashboard > Database > Tables > entries
+- Click the 3 dots > Enable Realtime > Save
+
+#### Push Local Database Changes to Live
+
+- Generate a DIFF migration file, e.g:
+
+```
+npx supabase db diff -f added_bio_field_to_profiles_table
+```
+
+- Push the changes:
+```
+npx supabase db push --linked
+```
+
+- If you see an error, copy the timestamp from any migration file that has already been applied (or already exists) on live and run this to ignore this migration file when pushing:
+
+```
+npx supabase migration repair [TIMESTAMP FROM FILE] --status applied
+```
+- Push the changes again:
+```
+npx supabase db push --linked
+```
+
+#### Switch between Live & Local
+
+- In **quasar.config.js**, set **isLocalSupabase** to **true** or false, e.g:
+
+```
+const isLocalSupabase = false // use live supabase instance
 ```

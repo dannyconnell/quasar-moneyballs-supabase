@@ -1,8 +1,6 @@
 {
   "recommendations": [
-    "editorconfig.editorconfig",
-    "vue.volar",
-    "wayou.vscode-todo-highlight"
+    "denoland.vscode-deno"
   ],
   "unwantedRecommendations": [
     "octref.vetur",
