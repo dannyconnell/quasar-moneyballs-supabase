@@ -310,8 +310,20 @@ const isLocalSupabase = true
 
 #### Enable Realtime for Entries Table
 
-- Local dashboard > Database > Tables > entries
-- Click the 3 dots > Enable Realtime > Save
+- **Local dashboard** > **Database** > **Tables** > **entries**
+- Click the 3 dots > **Enable Realtime** > **Save**
+
+#### Create Storage Policies
+
+- Go to **Local dashboard** > **Storage** > **Policies**
+- On **avatars** bucket, click **New policy**
+- Click **Get started quickly**
+- Choose **Give users access to only their own top level folder named as uid**
+- Click **Use this template**
+- Next to **Allowed operation** check all (SELECT, INSERT, UPDATE & DELETE)
+- Next to **Target roles**, choose **authenticated**
+- Click **Review**
+- Click **Save policy**
 
 #### Push Local Database Changes to Live
 
