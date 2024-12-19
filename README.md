@@ -172,6 +172,13 @@ END;
 - Click **Review**
 - Click **Save policy**
 
+### Deploy Edge Functions
+
+- Run this command to deploy the hello-world edge function (replace the project ref with yours):
+
+```
+supabase functions deploy hello-world --project-ref wewdmqlweyvgfayimpwy
+```
 
 ### Add Supabase Config to Moneyballs
 

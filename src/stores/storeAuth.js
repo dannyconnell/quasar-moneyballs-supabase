@@ -34,6 +34,7 @@ export const useStoreAuth = defineStore('auth', () => {
       supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
           if (session !== null) {
+            console.log('session: ', session)
             userDetails.id = session.user.id
             userDetails.email = session.user.email
             router.push('/') 
