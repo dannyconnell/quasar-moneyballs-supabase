@@ -4,21 +4,35 @@
 
 // Setup type definitions for built-in Supabase Runtime APIs
 import "jsr:@supabase/functions-js/edge-runtime.d.ts"
+import { corsHeaders } from '../_shared/cors.ts'
 
 console.log("Hello from Functions!")
 
 Deno.serve(async (req) => {
-  const greetings = ['Hello!', 'Welcome!', 'Word to your moms!', 'Word!', 'Peace & Love!']
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)]
-
-  const data = {
-    greeting,
+  // This is needed if you're planning to invoke your function from a browser.
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
   }
 
-  return new Response(
-    JSON.stringify(data),
-    { headers: { "Content-Type": "application/json" } },
-  )
+  try {
+    const greetings = ['Hello!', 'Welcome!', 'Word to your moms!', 'Word!', 'Peace & Love!']
+    const greeting = greetings[Math.floor(Math.random() * greetings.length)]
+
+    const data = {
+      greeting,
+    }
+
+    return new Response(JSON.stringify(data), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 200,
+    })
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 400,
+    })
+  }
+
 })
 
 /* To invoke locally:
