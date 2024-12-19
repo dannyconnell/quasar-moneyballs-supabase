@@ -34,12 +34,12 @@ export const useStoreAuth = defineStore('auth', () => {
       supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
           if (session !== null) {
-            console.log('session: ', session)
             userDetails.id = session.user.id
             userDetails.email = session.user.email
             router.push('/') 
             storeSettings.getProfile()
             storeEntries.loadEntries()
+            showGreeting(session.access_token)
           }
         } 
         else if (event === 'SIGNED_OUT') {
@@ -50,6 +50,25 @@ export const useStoreAuth = defineStore('auth', () => {
           storeEntries.clearEntries()
         }
       })
+    }
+
+    const showGreeting = async (access_token) => {
+      const myHeaders = new Headers()
+      myHeaders.append('Authorization', `Bearer ${ access_token }`)
+      
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      }
+      
+      try {
+        const response = await fetch('http://127.0.0.1:54321/functions/v1/greeting', requestOptions)
+        const result = await response.text()
+        console.log(result)
+      } catch (error) {
+        console.error(error)
+      }
     }
 
     const registerUser = async ({ email, password }) => {

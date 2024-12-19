@@ -8,7 +8,7 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-const isLocalSupabase = false
+const isLocalSupabase = true
 
 const { configure } = require('quasar/wrappers');
 
