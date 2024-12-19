@@ -51,6 +51,7 @@ export const useStoreAuth = defineStore('auth', () => {
           storeSettings.resetProfile()
           storeEntries.unsubscribeEntries()
           storeEntries.clearEntries()
+          seenGreeting.value = false
         }
       })
     }
