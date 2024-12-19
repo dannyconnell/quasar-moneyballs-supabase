@@ -1,6 +1,7 @@
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
+import { Notify } from 'quasar'
 import supabase from 'src/config/supabase'
 import { useStoreEntries } from 'src/stores/storeEntries'
 import { useStoreSettings } from 'src/stores/storeSettings'
@@ -20,6 +21,8 @@ export const useStoreAuth = defineStore('auth', () => {
     const userDetails = reactive({
       ...userDetailsDefault
     })
+
+    const seenGreeting = ref(false)
 
 
   /*
@@ -64,8 +67,14 @@ export const useStoreAuth = defineStore('auth', () => {
       
       try {
         const response = await fetch('http://127.0.0.1:54321/functions/v1/greeting', requestOptions)
-        const result = await response.text()
-        console.log(result)
+        const result = await response.json()
+        if (!seenGreeting.value) {
+          Notify.create({
+            message: result.greeting,
+            position: 'top'
+          })
+          seenGreeting.value = true
+        }
       } catch (error) {
         console.error(error)
       }
