@@ -37,8 +37,7 @@ export const useStoreAuth = defineStore('auth', () => {
             userDetails.id = session.user.id
             userDetails.email = session.user.email
             router.push('/') 
-            storeSettings.getAvatarUrl()
-            storeSettings.getBio()
+            storeSettings.getProfile()
             storeEntries.loadEntries()
           }
         } 

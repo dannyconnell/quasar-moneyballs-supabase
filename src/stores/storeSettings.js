@@ -91,31 +91,9 @@ export const useStoreSettings = defineStore('settings', () => {
 
       if (error) useShowErrorMessage('Could not upsert row on profiles table.')
       if (data) {
-        getAvatarUrl()
+        getProfile()
       }
       
-    }
-
-    const getAvatarUrl = async () => {
-
-      const storeAuth = useStoreAuth()
-
-      let { data: profiles, error } = await supabase
-        .from('profiles')
-        .select("*")
-        .eq('id', storeAuth.userDetails.id)
-
-      if (error) useShowErrorMessage('Could not get Avatar URL from Supabase.')
-
-      if (profiles) {
-        if (profiles[0]?.avatar_filename) {
-          const avatarFilename = profiles[0].avatar_filename
-
-          profile.avatarUrl = `${ process.env.SUPABASE_URL }/storage/v1/object/public/avatars/${ storeAuth.userDetails.id }/${ avatarFilename }`
-
-        }
-      }
-
     }
 
     const saveBio = async () => {
@@ -135,7 +113,7 @@ export const useStoreSettings = defineStore('settings', () => {
       }
     }
 
-    const getBio = async () => {
+    const getProfile = async () => {
 
       const storeAuth = useStoreAuth()
 
@@ -144,11 +122,16 @@ export const useStoreSettings = defineStore('settings', () => {
         .select("*")
         .eq('id', storeAuth.userDetails.id)
 
-      if (error) useShowErrorMessage('Could not get Bio from Supabase.')
+      if (error) useShowErrorMessage('Could not get Profile from Supabase.')
 
       if (profiles) {
         if (profiles[0]?.bio) {
           profile.bio = profiles[0].bio
+        }
+        if (profiles[0]?.avatar_filename) {
+          const avatarFilename = profiles[0].avatar_filename
+
+          profile.avatarUrl = `${ process.env.SUPABASE_URL }/storage/v1/object/public/avatars/${ storeAuth.userDetails.id }/${ avatarFilename }`
         }
       }
     }
@@ -173,9 +156,8 @@ export const useStoreSettings = defineStore('settings', () => {
       // actions
       loadSettings,
       uploadAvatar,
-      getAvatarUrl,
       saveBio,
-      getBio,
+      getProfile,
       resetProfile
 
     }
