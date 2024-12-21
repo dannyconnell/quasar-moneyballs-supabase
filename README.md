@@ -367,3 +367,46 @@ npx supabase db push --linked
 ```
 const isLocalSupabase = false // use live supabase instance
 ```
+
+### Build For Production
+
+- Set **isLocalSupabase** to **false** in **quasar.config.js**
+
+#### Web
+
+- Run **quasar build**
+- Deploy files in **dist/span** to a server 
+- Or use [Live Server VScode extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) to test locally
+
+#### iOS
+
+- Install [Xcode](https://developer.apple.com/download/all) 
+- Run **npm run build:ios**
+- In Xcode, from the devices dropdown at the top, choose a simulator
+- Click on the play button (or go to **Product** > **Run** from the Xcode menu)
+
+#### Android
+
+- Install [Android Studio](https://developer.android.com/studio)
+- Close the code editor if it's open
+- Click the 3 dots (top right) > **Virtual Device Manager**
+- Create an Emulator by clicking the **+** icon (if you don't have one)
+- Launch the Emulator by cliking the play button on the right
+- Run **npm run build:android**
+- In **Android Studio** choose an Emulator from the Devices dropdown
+- Click play button (**Run**)
+
+#### Mac
+
+- Run **npm run build:mac**
+- Launch the app from the **/dist** folder
+
+#### Windows
+
+- Install a Windows Virtual Machine (if on Mac) such as:
+  - [Parallels](https://www.parallels.com/)
+  - [Virtual Box](https://www.virtualbox.org/) - instructions in [free videos in my course here - Module 27](https://makeappsacademy.com/p/quasar-v1-cross-platform-apps-with-vue-2-vuex-firebase)
+- Run **npm run build:win**
+- On the Virtual Machine, create a copy of the windows folder (in **/dist**) to a place on the actual Virtual Machine
+- Launch the **.exe** file
+
