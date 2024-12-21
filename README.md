@@ -179,6 +179,11 @@ END;
 ```
 supabase functions deploy hello-world --project-ref wewdmqlweyvgfayimpwy
 ```
+- Run this command to deploy the greeting edge function (replace the project ref with yours):
+
+```
+supabase functions deploy greeting --project-ref wewdmqlweyvgfayimpwy
+```
 
 ### Add Supabase Config to Moneyballs
 
