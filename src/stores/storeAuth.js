@@ -69,7 +69,6 @@ export const useStoreAuth = defineStore('auth', () => {
       try {
         const response = await fetch('http://127.0.0.1:54321/functions/v1/greeting', requestOptions)
         const result = await response.json()
-        console.log('result: ', result)
         if (!seenGreeting.value) {
           Notify.create({
             message: result.greeting,

@@ -29,13 +29,20 @@ Deno.serve(async (req) => {
     const { data: userData } = await supabase.auth.getUser(token)
     const user = userData.user
 
-    const greetings = ['Hello!', 'Welcome!', 'Word to your moms!', 'Word!', 'Peace & Love!']
-    const greeting = greetings[Math.floor(Math.random() * greetings.length)]
+    let { data: entries, error } = await supabase
+      .from('entries')
+      .select("*")
+      .eq('user_id', user.id)
 
-    const data = {
-      greeting,
-      user
-    }
+    const entriesCount = entries ? entries.length : 0
+
+    const greetings = ['Hello!', 'Welcome!', 'Word to your moms!', 'Word!', 'Peace & Love!'],
+          randomGreeting = greetings[Math.floor(Math.random() * greetings.length)],
+          entriesCountText = `You've created ${ entriesCount } entries!`,
+          greeting = `${ randomGreeting } ${ entriesCountText }`,
+          data = {
+            greeting
+          }
 
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
