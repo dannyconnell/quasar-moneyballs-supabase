@@ -23,11 +23,18 @@ Deno.serve(async (req) => {
       { global: { headers: { Authorization: req.headers.get('Authorization')! } } }
     )
 
+    // Get the session or user object
+    const authHeader = req.headers.get('Authorization')!
+    const token = authHeader.replace('Bearer ', '')
+    const { data: userData } = await supabase.auth.getUser(token)
+    const user = userData.user
+
     const greetings = ['Hello!', 'Welcome!', 'Word to your moms!', 'Word!', 'Peace & Love!']
     const greeting = greetings[Math.floor(Math.random() * greetings.length)]
 
     const data = {
       greeting,
+      user
     }
 
     return new Response(JSON.stringify(data), {
