@@ -22,6 +22,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - Ensure that **Email** is enabled
 - Click on **Email** to show the dropdown options
 - Ensure that **Confirm email** is **disabled**
+- Click **Save**
 
 ![Setup Authentication](https://github.com/user-attachments/assets/7eae70ae-78b3-48f2-b44e-e90ab5775f2e)
 
@@ -72,7 +73,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 
 - Click on **Create policy**
 - Under **Policy Command** click on **DELETE**
-- Under **Templates**, click on **INSERT - Enable delete for users based on user_id**
+- Under **Templates**, click on **DELETE - Enable delete for users based on user_id**
 - Click on **Save Policy**
 
 #### UPDATE Policy
@@ -99,10 +100,15 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 | name    | text   | (leave empty) |
 | value   | int8   | 0 |
 
+- Click **Save**
+
+#### Add Row for entries_count
+
 - Click the 3 dots next to **stats** table > **View in Table Editor**
 - Click **Insert** > **Insert row**
 - Set the **name** to **entries_count**
 - Set the **value** to **0**
+- Click **Save**
 
 ### Profiles Table
 
@@ -110,16 +116,19 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - Set the name to **profiles**
 - Disable **Enable Row Level Security (RLS)**
 - Set **id** type to **uuid**
-- Add the following column (by clicking **Add column**):
+- Add the following columns (by clicking **Add column**):
 
 | Name            | Type   | Default Value
 | --------------- | ------ | --- |
 | avatar_filename | text   | (leave empty) |
 | bio             | text   | (leave empty) |
 
+- Click **Save**
+
 
 ### Create Database Function (increment_entries_count)
 
+- Go to **Database** > **Functions**
 - Click on **Create a new function**
 - Set **Name of function** to **increment_entries_count**
 - Set **Return type** to **trigger**
@@ -183,14 +192,18 @@ END;
 
 - Open the file `/quasar.config.js`
 - Find the `build > env` section
-- Replace the **SUPABASE_URL** value with your **Project URL**
-- Replace the **SUPABASE_ANON_KEY** value with your **API Key**:
+- Replace the **SUPABASE_URL** values with your **local** and **live** **Project URL**s
+- Replace the **SUPABASE_ANON_KEY** values with your **local** and **live** **API Keys**:
 
 ```
 build: {
   env: {
-    SUPABASE_URL: 'https://ymharbyqitxhyxzuagys.supabase.co',
-    SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltaGFyYnlxaXR4aHl4enVhZ3lzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIwMTg5MzQsImV4cCI6MjA0NzU5NDkzNH0.qqkzOtHSV_-zuGswNRaF1O4ibm-0tzxvd6yJMru2RG0'
+    SUPABASE_URL: isLocalSupabase
+      ? 'http://127.0.0.1:54321'
+      : 'https://wewdmqlweyvgfayimpwy.supabase.co',
+    SUPABASE_KEY: isLocalSupabase
+      ? 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'
+      : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indld2RtcWx3ZXl2Z2ZheWltcHd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzOTMzMzIsImV4cCI6MjA0ODk2OTMzMn0.eBdrctO6WyW1bv1KAEU9gHweojiz3ePluKPmfza2GuQ'
   },
   ...
 }
@@ -208,13 +221,17 @@ quasar dev
 
 ### Run Supabase Locally
 
+#### Log out Live User
+
+- In Moneyballs, if you have a live user logged in, log them out. Once you have Moneyballs working with the Local Supabase Instance, log in another user. 
+
 #### Setup Local Supabase Instance
 
 - [Install Docker](https://www.docker.com/) for your platform (with recommended settings)
 - Open a separate terminal (from the Quasar terminal)
 - Install Supabase CLI
 ```
-npm install supabase –save-dev
+npm install supabase –-save-dev
 ```
 - Login to Supabase:
 ```
@@ -237,9 +254,10 @@ npx supabase link
 
 #### Import Tables
 
-- Generate initial structure migration file:
+- Generate initial structure migration file
+- **IMPORTANT:** type this command in by hand & don't copy & paste it from here (the dashes get copied incorrectly)!
 ```
-npx supabase db diff -f initial_structure –linked
+npx supabase db diff -f initial_structure –-linked
 ```
 - You should see the migration file here:
 ```
@@ -252,7 +270,8 @@ npx supabase db reset
 
 #### Import Data
 
-- Generate the seed.sql file:
+- Generate the seed.sql file
+- **IMPORTANT:** type this command in by hand & don't copy & paste it from here (the dashes get copied incorrectly)!
 ```
 npx supabase db dump --data-only -f supabase/seed.sql --linked
 ```
@@ -311,7 +330,7 @@ const isLocalSupabase = true
 #### Enable Realtime for Entries Table
 
 - **Local dashboard** > **Database** > **Tables** > **entries**
-- Click the 3 dots > **Enable Realtime** > **Save**
+- Click the 3 dots > **Edit table** > **Enable Realtime** > **Save**
 
 #### Create Storage Policies
 
@@ -327,6 +346,7 @@ const isLocalSupabase = true
 
 #### Push Local Database Changes to Live
 
+- **IMPORTANT:** type the following commands in by hand & don't copy & paste them from here (the dashes get copied incorrectly)!
 - Generate a DIFF migration file, e.g:
 
 ```
