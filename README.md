@@ -287,7 +287,7 @@ npx supabase db reset
 npx supabase stop
 npx supabase start
 ```
-- Copy the local **API URL** and **anon key** from the terimal, e.g:
+- Copy the local **API URL** and **anon key** from the terminal, e.g:
 
 ```
 API URL: http://127.0.0.1:54321
