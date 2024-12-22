@@ -60,7 +60,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 
 - Click on **Create policy**
 - Under **Policy Command** click on **DELETE**
-- Under **Templates**, click on **INSERT - Enable delete for users based on user_id**
+- Under **Templates**, click on **DELETE - Enable delete for users based on user_id**
 - Click on **Save Policy**
 
 #### UPDATE Policy
@@ -85,6 +85,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - Ensure that **Email** is enabled
 - Click on **Email** to show the dropdown options
 - Ensure that **Confirm email** is **disabled**
+- Click **Save**
 
 ![Setup Authentication](https://github.com/user-attachments/assets/7eae70ae-78b3-48f2-b44e-e90ab5775f2e)
 
