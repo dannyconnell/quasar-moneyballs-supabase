@@ -60,7 +60,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 
 - Click on **Create policy**
 - Under **Policy Command** click on **DELETE**
-- Under **Templates**, click on **INSERT - Enable delete for users based on user_id**
+- Under **Templates**, click on **DELETE - Enable delete for users based on user_id**
 - Click on **Save Policy**
 
 #### UPDATE Policy
@@ -87,13 +87,19 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 | name    | text   | (leave empty) |
 | value   | int8   | 0 |
 
+- Click **Save**
+
+#### Add Row for entries_count
+
 - Click the 3 dots next to **stats** table > **View in Table Editor**
 - Click **Insert** > **Insert row**
 - Set the **name** to **entries_count**
 - Set the **value** to **0**
+- Click **Save**
 
 ### Create Database Function (increment_entries_count)
 
+- Go to **Database** > **Functions**
 - Click on **Create a new function**
 - Set **Name of function** to **increment_entries_count**
 - Set **Return type** to **trigger**
@@ -131,6 +137,7 @@ END;
 - Ensure that **Email** is enabled
 - Click on **Email** to show the dropdown options
 - Ensure that **Confirm email** is **disabled**
+- Click **Save**
 
 ![Setup Authentication](https://github.com/user-attachments/assets/7eae70ae-78b3-48f2-b44e-e90ab5775f2e)
 
