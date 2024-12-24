@@ -54,6 +54,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - Click on **Create policy**
 - Under **Policy Command** click on **INSERT**
 - Under **Templates**, click on **INSERT - Enable insert for users based on user_id**
+- Under **Target Roles**, choose **authenticated**
 - Click on **Save Policy**
 
 #### DELETE Policy
@@ -61,6 +62,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 - Click on **Create policy**
 - Under **Policy Command** click on **DELETE**
 - Under **Templates**, click on **DELETE - Enable delete for users based on user_id**
+- Under **Target Roles**, choose **authenticated**
 - Click on **Save Policy**
 
 #### UPDATE Policy
