@@ -47,7 +47,7 @@ This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** cour
 | order   | int8   | 1 |
 | user_id | uuid   | gen_random_uuid() |
 
-![Supabase - Create Entries Table](https://github.com/user-attachments/assets/52effa7d-178c-4058-880f-be6ceed5cb7f)
+![Supabase - Create Entries Table](https://github.com/user-attachments/assets/5ba5386a-a172-40e3-96e7-d39d206162be)
 
 - Click **Save**
 
