@@ -2,6 +2,14 @@
 
 This is the source code from the **Supabase & Vue 3 (with Quasar & Pinia)** course. Follow this guide to get the project running.
 
+### Install Docker
+
+- **[Install Docker](https://www.docker.com/)** for your platform
+- Launch **Docker**
+- Click **Accept**
+- Choose **Use recommended settings (requires password)** > **Finish**
+- Choose **Skip** on all of the welcome slides
+
 ### Create Moneyballs Supabase Project
 
 - Create a [Supabase](https://supabase.com) account
